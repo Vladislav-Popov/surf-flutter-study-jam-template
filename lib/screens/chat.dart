@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:surf_practice_chat_flutter/data/chat/repository/repository.dart';
+import 'package:surf_practice_chat_flutter/screens/inherited_notifier.dart';
 
 /// Chat screen templete. This is your starting point.
 class ChatScreen extends StatefulWidget {
-  final ChatRepository chatRepository;
-
   const ChatScreen({
     Key? key,
-    required this.chatRepository,
   }) : super(key: key);
 
   @override
@@ -19,6 +16,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final model = ChatModelProvider.watch(context)?.model;
+
     return Scaffold(
       appBar: AppBar(
         title: TextField(
@@ -28,7 +27,8 @@ class _ChatScreenState extends State<ChatScreen> {
           cursorColor: Colors.white,
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.refresh)),
+          IconButton(
+              onPressed: model?.updateMessage, icon: const Icon(Icons.refresh)),
         ],
       ),
       body: SafeArea(
@@ -45,16 +45,16 @@ class _ChatScreenState extends State<ChatScreen> {
                         leading: CircleAvatar(
                           child: Text('F'),
                         ),
-                        title: Text("Текст"),
+                        title: Text(model?.messages[index].author.name ?? ''),
                         subtitle: Text(
-                          "текст2",
+                          model?.messages[index].message ?? '',
                           maxLines: 1,
                         ),
                       ),
                     ),
                   );
                 },
-                itemCount: 30,
+                itemCount: model?.messages.length ?? 0,
               ),
             ),
             Padding(
