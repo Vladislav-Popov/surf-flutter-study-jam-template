@@ -21,6 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: TextField(
+          onChanged: model?.setName,
           decoration: InputDecoration.collapsed(
             hintText: 'Введите ник',
           ),
@@ -63,7 +64,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   Expanded(
                     child: TextField(
-                      controller: messageTextController,
+                      controller: model?.messageTextController,
                       textInputAction: TextInputAction.send,
                       decoration: InputDecoration(
                         hintText: 'Введите текст',
@@ -71,9 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      messageTextController.clear();
-                    },
+                    onPressed: model?.sendMessage,
                     icon: Icon(
                       Icons.send,
                       color: Theme.of(context).primaryColor,
