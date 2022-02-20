@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(
-          // colorSchemeSeed: Colors.deepPurple,
+          // colorScheme: Colors.grey,
           // useMaterial3: true,
           ),
       home: ChatScreen(
