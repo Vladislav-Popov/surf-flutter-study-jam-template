@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:surf_practice_chat_flutter/data/chat/models/geolocation.dart';
 import 'package:surf_practice_chat_flutter/data/chat/models/message.dart';
 import 'package:surf_practice_chat_flutter/data/chat/models/user.dart';
@@ -20,7 +19,7 @@ class ChatRepositoryFirebase implements ChatRepository {
     final result = await _firebaseClient
         .collection(_messagesCollectionKey)
         .limit(_messagesLimit)
-        .orderBy('created')
+        .orderBy('created', descending: true)
         .get();
 
     return result.docs.map(_parseFirebaseDataToLocal).toList();

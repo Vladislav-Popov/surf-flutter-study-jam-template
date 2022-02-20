@@ -19,9 +19,10 @@ class ChatModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void sendMessage() {
+  void sendMessage() async {
     if (messageTextController.text.isNotEmpty) {
-      _chatRepository.sendMessage(name, messageTextController.text);
+      await _chatRepository.sendMessage(name, messageTextController.text);
+
       messageTextController.clear();
       updateMessage();
     }

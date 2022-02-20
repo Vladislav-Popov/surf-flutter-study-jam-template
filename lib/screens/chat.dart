@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:surf_practice_chat_flutter/screens/inherited_notifier.dart';
 
@@ -37,6 +38,8 @@ class _ChatScreenState extends State<ChatScreen> {
           children: [
             Expanded(
               child: ListView.builder(
+                reverse: true,
+                dragStartBehavior: DragStartBehavior.down,
                 itemBuilder: (_, index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -44,7 +47,10 @@ class _ChatScreenState extends State<ChatScreen> {
                       child: ListTile(
                         onTap: () {},
                         leading: CircleAvatar(
-                          child: Text('F'),
+                          child: Text(model
+                                  ?.messages[index].author.name.characters.first
+                                  .toUpperCase() ??
+                              ''),
                         ),
                         title: Text(model?.messages[index].author.name ?? ''),
                         subtitle: Text(
